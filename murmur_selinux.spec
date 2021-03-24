@@ -14,7 +14,7 @@ Summary:	SELinux policy module for murmur
 Group:	System Environment/Base		
 License:	GPLv2+	
 # This is an example. You will need to change it.
-URL:		http://HOSTNAME
+URL:		https://github.com/53c70r/murmur-selinux
 Source0:	murmur.pp
 Source1:	murmur.if
 Source2:	murmur_selinux.8
