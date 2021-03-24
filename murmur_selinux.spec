@@ -6,7 +6,7 @@ restorecon -R /usr/sbin/murmurd; \
 
 %define selinux_policyver 3.14.6-35
 
-Name:   murmur_selinux
+Name:   murmur-selinux
 Version:	1.0
 Release:	1%{?dist}
 Summary:	SELinux policy module for murmur
