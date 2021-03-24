@@ -46,6 +46,8 @@ make -f /usr/share/selinux/devel/Makefile murmur.pp || exit
 sepolicy manpage -p . -d murmur_t
 # Fixing the file context on /usr/sbin/murmurd
 /sbin/restorecon -F -R -v /usr/sbin/murmurd
+# Fixing the file context on /var/lib/mumble-server
+/sbin/restorecon -F -R -v /var/lib/mumble-server
 # Generate a rpm package for the newly generated policy
 
 pwd=$(pwd)

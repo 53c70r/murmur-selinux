@@ -3,6 +3,7 @@
 
 %define relabel_files() \
 restorecon -R /usr/sbin/murmurd; \
+restorecon -R /var/lib/mumble-server; \
 
 %define selinux_policyver 3.14.6-35
 
@@ -13,7 +14,6 @@ Summary:	SELinux policy module for murmur
 
 Group:	System Environment/Base		
 License:	GPLv2+	
-# This is an example. You will need to change it.
 URL:		https://github.com/53c70r/murmur-selinux
 Source0:	murmur.pp
 Source1:	murmur.if
@@ -23,10 +23,11 @@ Source2:	murmur_selinux.8
 Requires: policycoreutils, libselinux-utils
 Requires(post): selinux-policy-base >= %{selinux_policyver}, policycoreutils
 Requires(postun): policycoreutils
+Requires: murmur
 BuildArch: noarch
 
 %description
-This package installs and sets up the SELinux policy security module for murmur.
+This package installs and sets up the  SELinux policy security module for murmur.
 
 %install
 install -d %{buildroot}%{_datadir}/selinux/packages

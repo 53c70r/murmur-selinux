@@ -54,11 +54,9 @@ If you want to allow all domains to execute in fips_mode, you must turn on the f
 The SELinux process type murmur_t can manage files labeled with the following file types.  The paths listed are the default paths for these file types.  Note the processes UID still need to have DAC permissions.
 
 .br
-.B var_lib_t
+.B murmur_var_lib_t
 
-	/opt/(.*/)?var/lib(/.*)?
-.br
-	/var/lib(/.*)?
+	/var/lib/mumble-server(/.*)?
 .br
 
 .SH FILE CONTEXTS
@@ -70,6 +68,18 @@ Policy governs the access confined processes have to these files.
 SELinux murmur policy is very flexible allowing users to setup their murmur processes in as secure a method as possible.
 .PP
 
+.PP
+.B STANDARD FILE CONTEXT
+
+SELinux defines the file context types for the murmur, if you wanted to
+store files with these types in a diffent paths, you need to execute the semanage command to sepecify alternate labeling and then use restorecon to put the labels on disk.
+
+.B semanage fcontext -a -t murmur_var_lib_t '/srv/mymurmur_content(/.*)?'
+.br
+.B restorecon -R -v /srv/mymurmur_content
+
+Note: SELinux often uses regular expressions to specify labels that match multiple files.
+
 .I The following file types are defined for murmur:
 
 
@@ -79,6 +89,14 @@ SELinux murmur policy is very flexible allowing users to setup their murmur proc
 .EE
 
 - Set files with the murmur_exec_t type, if you want to transition an executable to the murmur_t domain.
+
+
+.EX
+.PP
+.B murmur_var_lib_t
+.EE
+
+- Set files with the murmur_var_lib_t type, if you want to store the murmur files under the /var/lib directory.
 
 
 .PP
