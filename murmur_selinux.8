@@ -1,0 +1,113 @@
+.TH  "murmur_selinux"  "8"  "21-03-24" "murmur" "SELinux Policy murmur"
+.SH "NAME"
+murmur_selinux \- Security Enhanced Linux Policy for the murmur processes
+.SH "DESCRIPTION"
+
+Security-Enhanced Linux secures the murmur processes via flexible mandatory access control.
+
+The murmur processes execute with the murmur_t SELinux type. You can check if you have these processes running by executing the \fBps\fP command with the \fB\-Z\fP qualifier.
+
+For example:
+
+.B ps -eZ | grep murmur_t
+
+
+.SH "ENTRYPOINTS"
+
+The murmur_t SELinux type can be entered via the \fBmurmur_exec_t, shell_exec_t\fP file types.
+
+The default entrypoint paths for the murmur_t domain are the following:
+
+/usr/sbin/murmurd, /bin/d?ash, /bin/ksh.*, /bin/zsh.*, /usr/bin/d?ash, /usr/bin/ksh.*, /usr/bin/zsh.*, /bin/esh, /bin/bash, /bin/fish, /bin/mksh, /bin/sash, /bin/tcsh, /bin/yash, /bin/bash2, /usr/bin/esh, /sbin/nologin, /usr/bin/bash, /usr/bin/fish, /usr/bin/mksh, /usr/bin/sash, /usr/bin/tcsh, /usr/bin/yash, /usr/bin/bash2, /usr/sbin/sesh, /usr/sbin/smrsh, /usr/bin/scponly, /usr/libexec/sesh, /usr/sbin/nologin, /usr/bin/git-shell, /usr/sbin/scponlyc, /usr/libexec/sudo/sesh, /usr/bin/cockpit-bridge, /usr/libexec/cockpit-agent, /usr/libexec/git-core/git-shell
+.SH PROCESS TYPES
+SELinux defines process types (domains) for each process running on the system
+.PP
+You can see the context of a process using the \fB\-Z\fP option to \fBps\bP
+.PP
+Policy governs the access confined processes have to files.
+SELinux murmur policy is very flexible allowing users to setup their murmur processes in as secure a method as possible.
+.PP
+The following process types are defined for murmur:
+
+.EX
+.B murmur_t
+.EE
+.PP
+Note:
+.B semanage permissive -a murmur_t
+can be used to make the process type murmur_t permissive. SELinux does not deny access to permissive process types, but the AVC (SELinux denials) messages are still generated.
+
+.SH BOOLEANS
+SELinux policy is customizable based on least access required.  murmur policy is extremely flexible and has several booleans that allow you to manipulate the policy and run murmur with the tightest access possible.
+
+
+.PP
+If you want to allow all domains to execute in fips_mode, you must turn on the fips_mode boolean. Enabled by default.
+
+.EX
+.B setsebool -P fips_mode 1
+
+.EE
+
+.SH "MANAGED FILES"
+
+The SELinux process type murmur_t can manage files labeled with the following file types.  The paths listed are the default paths for these file types.  Note the processes UID still need to have DAC permissions.
+
+.br
+.B var_lib_t
+
+	/opt/(.*/)?var/lib(/.*)?
+.br
+	/var/lib(/.*)?
+.br
+
+.SH FILE CONTEXTS
+SELinux requires files to have an extended attribute to define the file type.
+.PP
+You can see the context of a file using the \fB\-Z\fP option to \fBls\bP
+.PP
+Policy governs the access confined processes have to these files.
+SELinux murmur policy is very flexible allowing users to setup their murmur processes in as secure a method as possible.
+.PP
+
+.I The following file types are defined for murmur:
+
+
+.EX
+.PP
+.B murmur_exec_t
+.EE
+
+- Set files with the murmur_exec_t type, if you want to transition an executable to the murmur_t domain.
+
+
+.PP
+Note: File context can be temporarily modified with the chcon command.  If you want to permanently change the file context you need to use the
+.B semanage fcontext
+command.  This will modify the SELinux labeling database.  You will need to use
+.B restorecon
+to apply the labels.
+
+.SH "COMMANDS"
+.B semanage fcontext
+can also be used to manipulate default file context mappings.
+.PP
+.B semanage permissive
+can also be used to manipulate whether or not a process type is permissive.
+.PP
+.B semanage module
+can also be used to enable/disable/install/remove policy modules.
+
+.B semanage boolean
+can also be used to manipulate the booleans
+
+.PP
+.B system-config-selinux
+is a GUI tool available to customize SELinux policy settings.
+
+.SH AUTHOR
+This manual page was auto-generated using
+.B "sepolicy manpage".
+
+.SH "SEE ALSO"
+selinux(8), murmur(8), semanage(8), restorecon(8), chcon(1), sepolicy(8), setsebool(8)

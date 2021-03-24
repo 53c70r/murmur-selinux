@@ -1,0 +1,30 @@
+policy_module(murmur, 1.0.0)
+
+type murmur_t;
+type murmur_exec_t;
+inetd_service_domain(murmur_t, murmur_exec_t)
+
+domain_use_interactive_fds(murmur_t)
+files_read_etc_files(murmur_t)
+auth_use_nsswitch(murmur_t)
+logging_send_syslog_msg(murmur_t)
+miscfiles_read_localization(murmur_t)
+
+require {
+	type murmur_t;
+	class process { execmem setsched };
+	class tcp_socket { accept listen };
+}
+
+allow murmur_t self:process { execmem setsched };
+allow murmur_t self:tcp_socket { accept listen };
+allow murmur_t self:capability { setgid setuid };
+allow murmur_t self:process { fork setrlimit };
+corecmd_check_exec_shell(murmur_t)
+corecmd_exec_bin(murmur_t)
+corecmd_mmap_bin_files(murmur_t)
+corecmd_shell_entry_type(murmur_t)
+corenet_tcp_bind_generic_port(murmur_t)
+corenet_udp_bind_generic_port(murmur_t)
+files_manage_mounttab(murmur_t)
+files_rw_var_lib_dirs(murmur_t)

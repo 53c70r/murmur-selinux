@@ -1,0 +1,40 @@
+
+## <summary>policy for murmur</summary>
+
+########################################
+## <summary>
+##	Execute murmur_exec_t in the murmur domain.
+## </summary>
+## <param name="domain">
+## <summary>
+##	Domain allowed to transition.
+## </summary>
+## </param>
+#
+interface(`murmur_domtrans',`
+	gen_require(`
+		type murmur_t, murmur_exec_t;
+	')
+
+	corecmd_search_bin($1)
+	domtrans_pattern($1, murmur_exec_t, murmur_t)
+')
+
+######################################
+## <summary>
+##	Execute murmur in the caller domain.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`murmur_exec',`
+	gen_require(`
+		type murmur_exec_t;
+	')
+
+	corecmd_search_bin($1)
+	can_exec($1, murmur_exec_t)
+')
