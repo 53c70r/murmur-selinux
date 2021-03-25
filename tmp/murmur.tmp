@@ -1041,7 +1041,7 @@
 # Service
 #
 
-#line 405847 "tmp/all_interfaces.conf"
+#line 406051 "tmp/all_interfaces.conf"
 
 #line 1 "murmur.te"
 
@@ -4633,471 +4633,470 @@ type murmur_var_lib_t;
 #line 24
  	
 
-allow murmur_t self:process { execmem setsched };
+allow murmur_t self:process { execmem setsched fork setrlimit };
 allow murmur_t self:tcp_socket { accept listen };
 allow murmur_t self:capability { setgid setuid };
-allow murmur_t self:process { fork setrlimit };
  	 	
-#line 30
+#line 29
 ##### begin corecmd_check_exec_shell(murmur_t) depth: 1
-#line 30
+#line 29
  	
-#line 30
+#line 29
 	
-#line 30
+#line 29
 	
-#line 30
+#line 29
 		require {
-#line 30
+#line 29
 			
-#line 30
+#line 29
 		type bin_t, shell_exec_t;
-#line 30
+#line 29
 	
-#line 30
+#line 29
 		} # end require
-#line 30
+#line 29
 	
-#line 30
+#line 29
 
-#line 30
+#line 29
 
-#line 30
+#line 29
 	
-#line 30
+#line 29
 	allow murmur_t bin_t:dir { getattr search open };
-#line 30
+#line 29
 	allow murmur_t bin_t:dir { getattr search open read lock ioctl };
-#line 30
+#line 29
 
-#line 30
+#line 29
 	
-#line 30
+#line 29
 	allow murmur_t bin_t:dir { getattr search open };
-#line 30
+#line 29
 	allow murmur_t bin_t:lnk_file { getattr read };
-#line 30
+#line 29
 
-#line 30
+#line 29
 	allow murmur_t shell_exec_t:file execute;
-#line 30
+#line 29
 
-#line 30
+#line 29
 	 	
-#line 30
+#line 29
 ##### end corecmd_check_exec_shell(murmur_t) depth: 0
+#line 29
+ 	
+ 	 	
+#line 30
+##### begin corecmd_exec_bin(murmur_t) depth: 1
+#line 30
+ 	
+#line 30
+	
+#line 30
+	
+#line 30
+		require {
+#line 30
+			
+#line 30
+		type bin_t;
+#line 30
+	
+#line 30
+		} # end require
+#line 30
+	
+#line 30
+
+#line 30
+
+#line 30
+	
+#line 30
+	allow murmur_t bin_t:dir { getattr search open };
+#line 30
+	allow murmur_t bin_t:lnk_file { getattr read };
+#line 30
+
+#line 30
+	
+#line 30
+	allow murmur_t bin_t:dir { getattr search open };
+#line 30
+	allow murmur_t bin_t:dir { getattr search open read lock ioctl };
+#line 30
+
+#line 30
+	allow murmur_t bin_t:file { { getattr open map read execute ioctl } ioctl lock execute_no_trans };
+#line 30
+
+#line 30
+	
+#line 30
+		 	 	
+#line 30
+##### begin files_exec_all_base_ro_files(murmur_t) depth: 2
+#line 30
+ 	
+#line 30
+	
+#line 30
+	
+#line 30
+		require {
+#line 30
+			
+#line 30
+		attribute base_ro_file_type;
+#line 30
+	
+#line 30
+		} # end require
+#line 30
+	
+#line 30
+
+#line 30
+
+#line 30
+	allow murmur_t base_ro_file_type:file { { getattr open map read execute ioctl } ioctl lock execute_no_trans };
+#line 30
+
+#line 30
+	 	
+#line 30
+##### end files_exec_all_base_ro_files(murmur_t) depth: 1
+#line 30
+ 	
+#line 30
+	
+#line 30
+
+#line 30
+	 	
+#line 30
+##### end corecmd_exec_bin(murmur_t) depth: 0
 #line 30
  	
  	 	
 #line 31
-##### begin corecmd_exec_bin(murmur_t) depth: 1
-#line 31
- 	
-#line 31
-	
-#line 31
-	
-#line 31
-		require {
-#line 31
-			
-#line 31
-		type bin_t;
-#line 31
-	
-#line 31
-		} # end require
-#line 31
-	
-#line 31
-
-#line 31
-
-#line 31
-	
-#line 31
-	allow murmur_t bin_t:dir { getattr search open };
-#line 31
-	allow murmur_t bin_t:lnk_file { getattr read };
-#line 31
-
-#line 31
-	
-#line 31
-	allow murmur_t bin_t:dir { getattr search open };
-#line 31
-	allow murmur_t bin_t:dir { getattr search open read lock ioctl };
-#line 31
-
-#line 31
-	allow murmur_t bin_t:file { { getattr open map read execute ioctl } ioctl lock execute_no_trans };
-#line 31
-
-#line 31
-	
-#line 31
-		 	 	
-#line 31
-##### begin files_exec_all_base_ro_files(murmur_t) depth: 2
-#line 31
- 	
-#line 31
-	
-#line 31
-	
-#line 31
-		require {
-#line 31
-			
-#line 31
-		attribute base_ro_file_type;
-#line 31
-	
-#line 31
-		} # end require
-#line 31
-	
-#line 31
-
-#line 31
-
-#line 31
-	allow murmur_t base_ro_file_type:file { { getattr open map read execute ioctl } ioctl lock execute_no_trans };
-#line 31
-
-#line 31
-	 	
-#line 31
-##### end files_exec_all_base_ro_files(murmur_t) depth: 1
-#line 31
- 	
-#line 31
-	
-#line 31
-
-#line 31
-	 	
-#line 31
-##### end corecmd_exec_bin(murmur_t) depth: 0
-#line 31
- 	
- 	 	
-#line 32
 ##### begin corecmd_mmap_bin_files(murmur_t) depth: 1
-#line 32
+#line 31
  	
-#line 32
+#line 31
 	
-#line 32
+#line 31
 	
-#line 32
+#line 31
 		require {
-#line 32
+#line 31
 			
-#line 32
+#line 31
 		type bin_t;
-#line 32
+#line 31
 	
-#line 32
+#line 31
 		} # end require
-#line 32
+#line 31
 	
-#line 32
+#line 31
 
-#line 32
+#line 31
 
-#line 32
+#line 31
 	 	 	
-#line 32
+#line 31
 ##### begin corecmd_read_bin_symlinks(murmur_t) depth: 2
-#line 32
+#line 31
  	
-#line 32
+#line 31
 	
-#line 32
+#line 31
 	
-#line 32
+#line 31
 		require {
-#line 32
+#line 31
 			
-#line 32
+#line 31
 		type bin_t;
-#line 32
+#line 31
 	
-#line 32
+#line 31
 		} # end require
-#line 32
+#line 31
 	
-#line 32
+#line 31
 
-#line 32
+#line 31
 
-#line 32
+#line 31
 	
-#line 32
+#line 31
 	allow murmur_t bin_t:dir { getattr search open };
-#line 32
+#line 31
 	allow murmur_t bin_t:lnk_file { getattr read };
-#line 32
+#line 31
 
-#line 32
+#line 31
 
-#line 32
+#line 31
 	 	
-#line 32
+#line 31
 ##### end corecmd_read_bin_symlinks(murmur_t) depth: 1
-#line 32
+#line 31
  	
-#line 32
+#line 31
 	
-#line 32
+#line 31
 	allow murmur_t bin_t:dir { getattr search open };
-#line 32
+#line 31
 	allow murmur_t bin_t:file { getattr open map read execute ioctl };
-#line 32
+#line 31
 
-#line 32
+#line 31
 
-#line 32
+#line 31
 	 	
-#line 32
+#line 31
 ##### end corecmd_mmap_bin_files(murmur_t) depth: 0
+#line 31
+ 	
+ 	 	
+#line 32
+##### begin corecmd_shell_entry_type(murmur_t) depth: 1
+#line 32
+ 	
+#line 32
+	
+#line 32
+	
+#line 32
+		require {
+#line 32
+			
+#line 32
+		type shell_exec_t;
+#line 32
+	
+#line 32
+		} # end require
+#line 32
+	
+#line 32
+
+#line 32
+
+#line 32
+	 	 	
+#line 32
+##### begin domain_entry_file(murmur_t,shell_exec_t) depth: 2
+#line 32
+ 	
+#line 32
+	
+#line 32
+	
+#line 32
+		require {
+#line 32
+			
+#line 32
+		attribute entry_type;
+#line 32
+	
+#line 32
+		} # end require
+#line 32
+	
+#line 32
+
+#line 32
+
+#line 32
+	allow murmur_t shell_exec_t:file entrypoint;
+#line 32
+	allow murmur_t shell_exec_t:file { { getattr open map read execute ioctl } ioctl lock };
+#line 32
+
+#line 32
+	typeattribute shell_exec_t entry_type;
+#line 32
+
+#line 32
+	 	 	
+#line 32
+##### begin corecmd_executable_file(shell_exec_t) depth: 3
+#line 32
+ 	
+#line 32
+	
+#line 32
+	
+#line 32
+		require {
+#line 32
+			
+#line 32
+		attribute exec_type;
+#line 32
+	
+#line 32
+		} # end require
+#line 32
+	
+#line 32
+
+#line 32
+
+#line 32
+	typeattribute shell_exec_t exec_type;
+#line 32
+
+#line 32
+	 	 	
+#line 32
+##### begin files_type(shell_exec_t) depth: 4
+#line 32
+ 	
+#line 32
+	
+#line 32
+	
+#line 32
+		require {
+#line 32
+			
+#line 32
+		attribute file_type, non_security_file_type, non_auth_file_type;
+#line 32
+	
+#line 32
+		} # end require
+#line 32
+	
+#line 32
+
+#line 32
+
+#line 32
+	typeattribute shell_exec_t file_type, non_security_file_type, non_auth_file_type;
+#line 32
+
+#line 32
+	 	
+#line 32
+##### end files_type(shell_exec_t) depth: 3
+#line 32
+ 	
+#line 32
+
+#line 32
+	 	
+#line 32
+##### end corecmd_executable_file(shell_exec_t) depth: 2
+#line 32
+ 	
+#line 32
+
+#line 32
+	#optional_policy(`
+#line 32
+	#	unconfined_exec_typebounds(shell_exec_t)
+#line 32
+	#')
+#line 32
+
+#line 32
+	 	
+#line 32
+##### end domain_entry_file(murmur_t,shell_exec_t) depth: 1
+#line 32
+ 	
+#line 32
+
+#line 32
+	 	
+#line 32
+##### end corecmd_shell_entry_type(murmur_t) depth: 0
 #line 32
  	
  	 	
 #line 33
-##### begin corecmd_shell_entry_type(murmur_t) depth: 1
-#line 33
- 	
-#line 33
-	
-#line 33
-	
-#line 33
-		require {
-#line 33
-			
-#line 33
-		type shell_exec_t;
-#line 33
-	
-#line 33
-		} # end require
-#line 33
-	
-#line 33
-
-#line 33
-
-#line 33
-	 	 	
-#line 33
-##### begin domain_entry_file(murmur_t,shell_exec_t) depth: 2
-#line 33
- 	
-#line 33
-	
-#line 33
-	
-#line 33
-		require {
-#line 33
-			
-#line 33
-		attribute entry_type;
-#line 33
-	
-#line 33
-		} # end require
-#line 33
-	
-#line 33
-
-#line 33
-
-#line 33
-	allow murmur_t shell_exec_t:file entrypoint;
-#line 33
-	allow murmur_t shell_exec_t:file { { getattr open map read execute ioctl } ioctl lock };
-#line 33
-
-#line 33
-	typeattribute shell_exec_t entry_type;
-#line 33
-
-#line 33
-	 	 	
-#line 33
-##### begin corecmd_executable_file(shell_exec_t) depth: 3
-#line 33
- 	
-#line 33
-	
-#line 33
-	
-#line 33
-		require {
-#line 33
-			
-#line 33
-		attribute exec_type;
-#line 33
-	
-#line 33
-		} # end require
-#line 33
-	
-#line 33
-
-#line 33
-
-#line 33
-	typeattribute shell_exec_t exec_type;
-#line 33
-
-#line 33
-	 	 	
-#line 33
-##### begin files_type(shell_exec_t) depth: 4
-#line 33
- 	
-#line 33
-	
-#line 33
-	
-#line 33
-		require {
-#line 33
-			
-#line 33
-		attribute file_type, non_security_file_type, non_auth_file_type;
-#line 33
-	
-#line 33
-		} # end require
-#line 33
-	
-#line 33
-
-#line 33
-
-#line 33
-	typeattribute shell_exec_t file_type, non_security_file_type, non_auth_file_type;
-#line 33
-
-#line 33
-	 	
-#line 33
-##### end files_type(shell_exec_t) depth: 3
-#line 33
- 	
-#line 33
-
-#line 33
-	 	
-#line 33
-##### end corecmd_executable_file(shell_exec_t) depth: 2
-#line 33
- 	
-#line 33
-
-#line 33
-	#optional_policy(`
-#line 33
-	#	unconfined_exec_typebounds(shell_exec_t)
-#line 33
-	#')
-#line 33
-
-#line 33
-	 	
-#line 33
-##### end domain_entry_file(murmur_t,shell_exec_t) depth: 1
-#line 33
- 	
-#line 33
-
-#line 33
-	 	
-#line 33
-##### end corecmd_shell_entry_type(murmur_t) depth: 0
-#line 33
- 	
- 	 	
-#line 34
 ##### begin corenet_tcp_bind_generic_port(murmur_t) depth: 1
-#line 34
+#line 33
  	
-#line 34
+#line 33
 	
-#line 34
+#line 33
 	
-#line 34
+#line 33
 		require {
-#line 34
+#line 33
 			
-#line 34
+#line 33
 		type port_t, unreserved_port_t, ephemeral_port_t;
-#line 34
+#line 33
 		attribute defined_port_type;
-#line 34
+#line 33
 	
-#line 34
+#line 33
 		} # end require
-#line 34
+#line 33
 	
-#line 34
+#line 33
 
-#line 34
+#line 33
 
-#line 34
+#line 33
 	allow murmur_t { port_t unreserved_port_t ephemeral_port_t }:tcp_socket name_bind;
-#line 34
+#line 33
 	dontaudit murmur_t defined_port_type:tcp_socket name_bind;
-#line 34
+#line 33
 
-#line 34
+#line 33
 	 	
-#line 34
+#line 33
 ##### end corenet_tcp_bind_generic_port(murmur_t) depth: 0
-#line 34
+#line 33
  	
  	 	
-#line 35
+#line 34
 ##### begin corenet_udp_bind_generic_port(murmur_t) depth: 1
-#line 35
+#line 34
  	
-#line 35
+#line 34
 	
-#line 35
+#line 34
 	
-#line 35
+#line 34
 		require {
-#line 35
+#line 34
 			
-#line 35
+#line 34
 		type port_t, unreserved_port_t, ephemeral_port_t;
-#line 35
+#line 34
 		attribute defined_port_type;
-#line 35
+#line 34
 	
-#line 35
+#line 34
 		} # end require
-#line 35
+#line 34
 	
-#line 35
+#line 34
 
-#line 35
+#line 34
 
-#line 35
+#line 34
 	allow murmur_t { port_t unreserved_port_t ephemeral_port_t }:udp_socket name_bind;
-#line 35
+#line 34
 	dontaudit murmur_t defined_port_type:udp_socket name_bind;
-#line 35
+#line 34
 
-#line 35
+#line 34
 	 	
-#line 35
+#line 34
 ##### end corenet_udp_bind_generic_port(murmur_t) depth: 0
-#line 35
+#line 34
  	
