@@ -5,11 +5,10 @@
 restorecon -R /usr/sbin/murmurd; \
 restorecon -R /var/lib/mumble-server; \
 
-%define selinux_policyver 3.14.6-35
 
 Name:   murmur-selinux
 Version:	1.0
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	SELinux policy module for murmur
 
 Group:	System Environment/Base		
@@ -63,7 +62,7 @@ exit 0
 %attr(0600,root,root) %{_datadir}/selinux/packages/murmur.pp
 %{_datadir}/selinux/devel/include/contrib/murmur.if
 %{_mandir}/man8/murmur_selinux.8.*
-
+%license LICENSE
 
 %changelog
 * Wed Mar 24 2021 Silvan Nagl <mail@53c70r.de> 1.0-1
