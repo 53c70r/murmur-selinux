@@ -17,7 +17,7 @@ URL:		https://github.com/53c70r/murmur-selinux
 Source0:	murmur.pp
 Source1:	murmur.if
 Source2:	murmur_selinux.8
-
+Source3:    LICENSE
 
 Requires: policycoreutils, libselinux-utils
 Requires(post): selinux-policy-base >= %{selinux_policyver}, policycoreutils
@@ -36,6 +36,7 @@ install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/selinux/devel/include/contrib/
 install -d %{buildroot}%{_mandir}/man8/
 install -m 644 %{SOURCE2} %{buildroot}%{_mandir}/man8/murmur_selinux.8
 install -d %{buildroot}/etc/selinux/targeted/contexts/users/
+install -m 644 %{SOURCE3} %{_builddir}/LICENSE
 
 
 %post
