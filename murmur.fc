@@ -1,3 +1,0 @@
-/usr/sbin/murmurd		--	gen_context(system_u:object_r:murmur_exec_t,s0)
-
-/var/lib/mumble-server(/.*)?		gen_context(system_u:object_r:murmur_var_lib_t,s0)

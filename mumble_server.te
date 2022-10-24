@@ -1,0 +1,34 @@
+policy_module(mumble_server, 1.0.0)
+
+type mumble_server_t;
+type mumble_server_exec_t;
+inetd_service_domain(mumble_server_t, mumble_server_exec_t)
+
+require {
+	type mumble_server_t;
+	class process { execmem setsched };
+	class tcp_socket { accept listen };
+}
+
+type mumble_server_var_lib_t;
+files_type(mumble_server_var_lib_t)
+
+manage_dirs_pattern(mumble_server_t, mumble_server_var_lib_t, mumble_server_var_lib_t)
+manage_files_pattern(mumble_server_t, mumble_server_var_lib_t, mumble_server_var_lib_t)
+manage_lnk_files_pattern(mumble_server_t, mumble_server_var_lib_t, mumble_server_var_lib_t)
+files_var_lib_filetrans(mumble_server_t, mumble_server_var_lib_t, { dir file lnk_file })
+domain_use_interactive_fds(mumble_server_t)
+files_read_etc_files(mumble_server_t)
+auth_use_nsswitch(mumble_server_t)
+logging_send_syslog_msg(mumble_server_t)
+miscfiles_read_localization(mumble_server_t)
+
+allow mumble_server_t self:process { execmem setsched fork setrlimit };
+allow mumble_server_t self:tcp_socket { accept listen };
+allow mumble_server_t self:capability { setgid setuid };
+corecmd_check_exec_shell(mumble_server_t)
+corecmd_exec_bin(mumble_server_t)
+corecmd_mmap_bin_files(mumble_server_t)
+corecmd_shell_entry_type(mumble_server_t)
+corenet_tcp_bind_generic_port(mumble_server_t)
+corenet_udp_bind_generic_port(mumble_server_t)
